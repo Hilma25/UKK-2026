@@ -26,4 +26,3 @@ if (mysqli_query($koneksi, $sql)) {
 
 }
 ?>
-

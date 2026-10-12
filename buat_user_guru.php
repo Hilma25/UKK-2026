@@ -1,9 +1,9 @@
 <?php
 //buat_user_awal.php
 //jalankan file ini satu kali lewat browser untuk membuat user awal 
-include 'config/koneksi.php' ;
+include 'config/koneksi.php';
 
-$name = 'Administrator';
+$name = 'guru';
 $email = 'guru@gmail.com';
 $password = password_hash('guru123', PASSWORD_DEFAULT);
 $role = 'guru';
@@ -14,6 +14,5 @@ $sql .= "VALUES ('$name','$email','$password','$role')";
 if (mysqli_query($koneksi, $sql)) {
     echo 'User admin berhasil dibuat. Silakan hapus file ini. ';
 } else {
-    echo 'Gagal membuat user: ' .mysqli_error($koneksi);
+    echo 'Gagal membuat user: ' . mysqli_error($koneksi);
 }
-?>
