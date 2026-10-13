@@ -14,7 +14,7 @@ include 'includes/cek_session.php';
 <div class="container-fluid">
     <div class="row">
         <!-- SIDEBAR -->
-        <div class="col-md-3 col-lg-2 bg-dark min-vh-100 p-3">
+         <div class="col-md-3 col-lg-2 bg-dark min-vh-100 p-3">
             <h4 class="text-white mb-4">
               Pelanggaran Siswa
             </h4>
