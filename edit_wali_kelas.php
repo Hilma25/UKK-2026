@@ -1,5 +1,5 @@
 <?php
-// edit_walikelas.php
+// edit_wali_kelas.php
 include 'includes/cek_session.php';
 include 'config/koneksi.php';
 
@@ -7,7 +7,7 @@ $id = (int) ($_GET['id'] ?? 0);
 
 $stmt = mysqli_prepare(
     $koneksi,
-    "SELECT * FROM t_walikelas WHERE id = ?"
+    "SELECT * FROM t_wali_kelas WHERE id = ?"
 );
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
@@ -42,7 +42,7 @@ $guru = mysqli_query(
 
 <h1>Edit Wali Kelas</h1>
 
-<form action="proses_edit_walikelas.php" method="POST">
+<form action="proses_edit_wali_kelas.php" method="POST">
     <input type="hidden" name="id"
            value="<?php echo $data['id']; ?>">
 
@@ -142,7 +142,7 @@ $guru = mysqli_query(
     </table>
 </form>
 
-<p><a href="kelola_walikelas.php">Kembali</a></p>
+<p><a href="kelola_wali_kelas.php">Kembali</a></p>
 
 </body>
 </html>

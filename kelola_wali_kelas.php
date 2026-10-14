@@ -94,7 +94,7 @@ $hasil = mysqli_query($koneksi, $sql);
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-<h1>Kelola Wali Kelas</h1>
+
 
 <p>
     <a href="dashboard.php">Kembali ke Dashboard</a> |
@@ -126,7 +126,7 @@ $hasil = mysqli_query($koneksi, $sql);
                 ? 'Aktif' : 'Tidak Aktif'; ?>
         </td>
         <td>
-            <a href="edit_walikelas.php?id=<?php echo $row['id']; ?>">
+            <a href="edit_wali_kelas.php?id=<?php echo $row['id']; ?>">
                <button type="button" class="btn btn-warning">Edit</button>
             </a>
             |
