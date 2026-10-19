@@ -1,3 +1,4 @@
+
 <?php
 // kelola_kelas.php
 include 'includes/cek_session.php';
@@ -8,94 +9,145 @@ $hasil = mysqli_query($koneksi, $sql);
 ?>
 
 <!DOCTYPE html>
-<html>
-
+<html lang="id">
 <head>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Kelola Kelas</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- DataTables Bootstrap 5 -->
+    <link href="https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.min.css"
+          rel="stylesheet">
 </head>
 
 <body>
 
 <div class="container-fluid">
     <div class="row">
-       <?php
-            include 'layout/sidebar.php';
-        ?>
+
+        <?php include 'layout/sidebar.php'; ?>
+
         <!-- KONTEN -->
         <main class="col-md-9 col-lg-10 p-4">
+
             <h2>Kelola Kelas</h2>
-            <p>
-                Selamat datang di halaman Kelas.
-            </p>
-            <div class="row">
-     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+            <p>Selamat datang di halaman Kelas.</p>
 
-
-    <p>
-        <a href="dashboard.php">Kembali ke Dashboard</a> |
-        <a href="tambah_kelas.php">Tambah Kelas</a>
-    </p>
-
-    <table class="table">
-
-        <tr>
-            <th>ID</th>
-            <th>Nama Kelas</th>
-            <th>Tingkat</th>
-            <th>Jurusan</th>
-            <th>Status Aktif</th>
-            <th>Dibuat</th>
-            <th>Diubah</th>
-            <th>Aksi</th>
-        </tr>
-
-        <?php while ($row = mysqli_fetch_assoc($hasil)) { ?>
-
-        <tr>
-
-            <td><?php echo $row['id']; ?></td>
-
-            <td><?php echo $row['nama']; ?></td>
-
-            <td><?php echo $row['tingkat']; ?></td>
-
-            <td><?php echo $row['jurusan']; ?></td>
-
-            <td>
-                <?php
-                if ($row['status_aktif'] == 1) {
-                    echo "Aktif";
-                } else {
-                    echo "Tidak Aktif";
-                }
-                ?>
-            </td>
-
-            <td><?php echo $row['created_at']; ?></td>
-
-            <td><?php echo $row['updated_at']; ?></td>
-
-            <td>
-                <a href="edit_kelas.php?id=<?php echo $row['id']; ?>">
-                  <button type="button" class="btn btn-warning">Edit</button>
+            <div class="mb-3">
+                <a href="dashboard.php" class="btn btn-secondary">
+                    Kembali ke Dashboard
                 </a>
 
-                |
-
-                <a href="hapus_kelas.php?id=<?php echo $row['id']; ?>"
-                   onclick="return confirm('Yakin ingin menghapus data kelas ini?');">
-                  <button type="button" class="btn btn-danger">Hapus</button>
+                <a href="tambah_kelas.php" class="btn btn-primary">
+                    Tambah Kelas
                 </a>
-            </td>
+            </div>
 
-        </tr>
+            <div class="table-responsive">
+                <table id="tabelKelas"
+                       class="table table-striped table-bordered table-hover">
 
-        <?php } ?>
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nama Kelas</th>
+                            <th>Tingkat</th>
+                            <th>Jurusan</th>
+                            <th>Status Aktif</th>
+                            <th>Dibuat</th>
+                            <th>Diubah</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
 
-    </table>
+                    <tbody>
+                    <?php while ($row = mysqli_fetch_assoc($hasil)) { ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($row['id']); ?></td>
+
+                            <td><?php echo htmlspecialchars($row['nama']); ?></td>
+
+                            <td><?php echo htmlspecialchars($row['tingkat']); ?></td>
+
+                            <td><?php echo htmlspecialchars($row['jurusan']); ?></td>
+
+                            <td>
+                                <?php
+                                if ($row['status_aktif'] == 1) {
+                                    echo "Aktif";
+                                } else {
+                                    echo "Tidak Aktif";
+                                }
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php echo htmlspecialchars($row['created_at'] ?? ''); ?>
+                            </td>
+
+                            <td>
+                                <?php echo htmlspecialchars($row['updated_at'] ?? ''); ?>
+                            </td>
+
+                            <td>
+                                <a href="edit_kelas.php?id=<?php echo urlencode($row['id']); ?>"
+                                   class="btn btn-warning btn-sm">
+                                    Edit
+                                </a>
+
+                                <a href="hapus_kelas.php?id=<?php echo urlencode($row['id']); ?>"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Yakin ingin menghapus data kelas ini?');">
+                                    Hapus
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Aktifkan DataTables -->
+<script>
+$(document).ready(function () {
+    $('#tabelKelas').DataTable({
+        language: {
+            search: "Cari:",
+            lengthMenu: "Tampilkan _MENU_ data",
+            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+            infoEmpty: "Tidak ada data kelas",
+            zeroRecords: "Data kelas tidak ditemukan",
+            emptyTable: "Belum ada data kelas",
+            paginate: {
+                first: "Pertama",
+                last: "Terakhir",
+                next: "Berikutnya",
+                previous: "Sebelumnya"
+            }
+        },
+        pageLength: 10,
+        lengthMenu: [5, 10, 25, 50, 100],
+        order: [[1, 'asc']]
+    });
+});
+</script>
 
 </body>
 </html>
