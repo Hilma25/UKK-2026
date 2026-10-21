@@ -1,5 +1,5 @@
 <?php
-// proses_tambah_siswa.php
+// proses_tambah_guru.php
 include 'includes/cek_session.php';
 include 'config/koneksi.php';
 

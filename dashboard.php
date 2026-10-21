@@ -34,7 +34,7 @@ include 'includes/cek_session.php';
                                 Data Siswa
                             </h5>
                             <h2>
-                                100
+                                120
                             </h2>
                         </div>
                     </div>
@@ -47,7 +47,7 @@ include 'includes/cek_session.php';
                                 Data Guru
                             </h5>
                             <h2>
-                                50
+                                25
                             </h2>
                         </div>
                     </div>
