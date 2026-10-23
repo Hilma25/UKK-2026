@@ -36,11 +36,37 @@ $guru = mysqli_query(
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edit Wali Kelas</title>
+
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <title>Edit Wali Kelas</title>
+
+     <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- DataTables Bootstrap 5 -->
+    <link href="https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.min.css"
+          rel="stylesheet">
 </head>
 <body>
 
-<h1>Edit Wali Kelas</h1>
+  <div class="container-fluid">
+    <div class="row">
+
+        <?php include 'layout/sidebar.php'; ?>
+
+        <!-- KONTEN -->
+        <main class="col-md-9 col-lg-10 p-4">
+
+             <h1>Edit Wali Kelas</h1>
+
+            <div class="mb-3">
+                <a href="dashboard.php" class="btn btn-secondary mb-3">
+                    Kembali ke Dashboard
+                </a>
+            </div>
 
 <form action="proses_edit_wali_kelas.php" method="POST">
     <input type="hidden" name="id"
