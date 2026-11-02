@@ -8,7 +8,8 @@ $nama = $_POST['nama'];
 $email = $_POST['email'];
 $status_aktif = $_POST['status_aktif'];
 
-$sql = "INSERT INTO t_guru
+
+$sql = "INSERT INTO t_guru 
         (nip, nama, email, status_aktif)
         VALUES 
         ('$nip', '$nama', '$email', '$status_aktif')";

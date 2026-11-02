@@ -2,6 +2,9 @@
 
 include "config/koneksi.php";
 
+header("Content-Type: application/vnd.ms-excel");
+header("Content-Disposition: attachment; filename=laporan_pelanggaran.xls");
+
 $data = mysqli_query($koneksi, "
     SELECT 
         s.nis,
@@ -15,9 +18,7 @@ $data = mysqli_query($koneksi, "
 
 ?>
 
-<h2 align="center">LAPORAN PELANGGARAN SISWA</h2>
-
-<table border="1" cellpadding="8" cellspacing="0" width="100%">
+<table border="1">
 
 <tr>
     <th>No</th>
@@ -34,16 +35,12 @@ while ($row = mysqli_fetch_assoc($data)) {
 
 ?>
 
-   <tr>
-                                    <th>No</th>
-                                    <th>Nama Siswa</th>
-                                    <th>Kelas</th>
-                                    <th>Pelanggaran</th>
-                                    <th>Tanggal</th>
-                                    <th>Poin</th>
-                                    <th>Tindakan</th>
-                                    <th>Status</th>
-                                </tr>
+<tr>
+    <td><?php echo $no; ?></td>
+    <td><?php echo $row['nis']; ?></td>
+    <td><?php echo $row['nama']; ?></td>
+    <td><?php echo $row['pelanggaran']; ?></td>
+</tr>
 
 <?php
 
@@ -54,7 +51,3 @@ $no++;
 ?>
 
 </table>
-
-<script>
-window.print();
-</script>

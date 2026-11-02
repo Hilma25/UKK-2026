@@ -33,7 +33,7 @@ include 'includes/cek_session.php';
         <!-- KONTEN -->
         <main class="col-md-9 col-lg-10 p-4">
 
-             <h1>Tambah Guru</h1>
+             <h1>Tambah Siswa</h1>
 
             <div class="mb-3">
                 <a href="kelola_siswa.php" class="btn btn-secondary mb-3">

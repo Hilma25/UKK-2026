@@ -1,6 +1,6 @@
-
 <?php
 // kelola_tahun_ajaran.php
+
 include 'includes/cek_session.php';
 include 'config/koneksi.php';
 
@@ -19,158 +19,207 @@ $hasil = mysqli_query($koneksi, $sql);
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+        rel="stylesheet">
 
     <!-- DataTables Bootstrap 5 -->
     <link href="https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.min.css"
-          rel="stylesheet">
+        rel="stylesheet">
 </head>
 
 <body>
 
-<div class="container-fluid">
-    <div class="row">
+    <div class="container-fluid">
+        <div class="row">
 
-        <?php include 'layout/sidebar.php'; ?>
+            <?php include 'layout/sidebar.php'; ?>
 
-        <!-- KONTEN -->
-        <main class="col-md-9 col-lg-10 p-4">
+            <!-- KONTEN -->
+            <main class="col-md-9 col-lg-10 p-4">
 
-            <h2>Kelola Tahun Ajaran</h2>
-            <p>Selamat datang di halaman Tahun Ajaran.</p>
+                <h1 class="mb-4">Kelola Tahun Ajaran</h1>
 
-            <div class="mb-3">
-                <a href="dashboard.php" class="btn btn-secondary">
-                    Kembali ke Dashboard
-                </a>
+                <!-- Tombol Navigasi -->
+                <div class="mb-3">
 
-                <a href="tambah_tahun_ajaran.php" class="btn btn-primary">
-                    Tambah Tahun Ajaran
-                </a>
-            </div>
+                    <a href="dashboard.php" class="btn btn-secondary">
+                        Kembali ke Dashboard
+                    </a>
 
-            <!-- TABEL DATA TAHUN AJARAN -->
-            <div class="table-responsive">
+                    <a href="tambah_tahun_ajaran.php" class="btn btn-primary">
+                         Tambah Tahun Ajaran
+                    </a>
 
-                <table id="tabelTahunAjaran"
-                       class="table table-striped table-bordered table-hover">
+                </div>
 
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama Tahun Ajaran</th>
-                            <th>Tanggal Mulai</th>
-                            <th>Tanggal Selesai</th>
-                            <th>Status Aktif</th>
-                            <th>Dibuat</th>
-                            <th>Diubah</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
+                <!-- TABEL DATA TAHUN AJARAN -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
 
-                    <tbody>
+                        <div class="table-responsive">
 
-                    <?php while ($row = mysqli_fetch_assoc($hasil)) { ?>
+                            <table id="tabelTahunAjaran"
+                                class="table table-striped table-bordered table-hover align-middle w-100">
 
-                        <tr>
-                            <td>
-                                <?php echo htmlspecialchars($row['id']); ?>
-                            </td>
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Tahun Ajaran</th>
+                                        <th>Tanggal Mulai</th>
+                                        <th>Tanggal Selesai</th>
+                                        <th>Status Aktif</th>
+                                        <th>Dibuat</th>
+                                        <th>Diubah</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
 
-                            <td>
-                                <?php echo htmlspecialchars($row['nama']); ?>
-                            </td>
+                                <tbody>
 
-                            <td>
-                                <?php echo htmlspecialchars($row['tanggal_mulai'] ?? ''); ?>
-                            </td>
+                                    <?php while ($row = mysqli_fetch_assoc($hasil)) { ?>
 
-                            <td>
-                                <?php echo htmlspecialchars($row['tanggal_selesai'] ?? ''); ?>
-                            </td>
+                                        <tr>
+                                            <!-- Nomor urut otomatis -->
+                                            <td></td>
 
-                            <td>
-                                <?php
-                                if ($row['status_aktif'] == 1) {
-                                    echo "Aktif";
-                                } else {
-                                    echo "Tidak Aktif";
-                                }
-                                ?>
-                            </td>
+                                            <td>
+                                                <?= htmlspecialchars($row['nama'] ?? '') ?>
+                                            </td>
 
-                            <td>
-                                <?php echo htmlspecialchars($row['created_at'] ?? ''); ?>
-                            </td>
+                                            <td>
+                                                <?= htmlspecialchars($row['tanggal_mulai'] ?? '-') ?>
+                                            </td>
 
-                            <td>
-                                <?php echo htmlspecialchars($row['updated_at'] ?? ''); ?>
-                            </td>
+                                            <td>
+                                                <?= htmlspecialchars($row['tanggal_selesai'] ?? '-') ?>
+                                            </td>
 
-                            <td>
-                                <a href="edit_tahun_ajaran.php?id=<?php echo urlencode($row['id']); ?>"
-                                   class="btn btn-warning btn-sm">
-                                    Edit
-                                </a>
+                                            <td>
+                                                <?php if ($row['status_aktif'] == 1) { ?>
 
-                                <a href="hapus_tahun_ajaran.php?id=<?php echo urlencode($row['id']); ?>"
-                                   class="btn btn-danger btn-sm"
-                                   onclick="return confirm('Yakin ingin menghapus data tahun ajaran ini?');">
-                                    Hapus
-                                </a>
-                            </td>
-                        </tr>
+                                                    <span class="badge bg-success">
+                                                        Aktif
+                                                    </span>
 
-                    <?php } ?>
+                                                <?php } else { ?>
 
-                    </tbody>
+                                                    <span class="badge bg-danger">
+                                                        Tidak Aktif
+                                                    </span>
 
-                </table>
+                                                <?php } ?>
+                                            </td>
 
-            </div>
+                                            <td>
+                                                <?= htmlspecialchars($row['created_at'] ?? '-') ?>
+                                            </td>
 
-        </main>
+                                            <td>
+                                                <?= htmlspecialchars($row['updated_at'] ?? '-') ?>
+                                            </td>
+
+                                            <td>
+                                                <div class="d-flex gap-2">
+
+                                                    <a href="edit_tahun_ajaran.php?id=<?= urlencode($row['id']) ?>"
+                                                        class="btn btn-warning btn-sm">
+                                                        Edit
+                                                    </a>
+
+                                                    <a href="hapus_tahun_ajaran.php?id=<?= urlencode($row['id']) ?>"
+                                                        class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Yakin ingin menghapus tahun ajaran ini?');">
+                                                        Hapus
+                                                    </a>
+
+                                                </div>
+                                            </td>
+
+                                        </tr>
+
+                                    <?php } ?>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </main>
+
+        </div>
     </div>
-</div>
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-<!-- DataTables -->
-<script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.min.js"></script>
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
 
-<!-- Mengaktifkan DataTables -->
-<script>
-$(document).ready(function () {
+    <!-- DataTables Bootstrap 5 -->
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.min.js"></script>
 
-    $('#tabelTahunAjaran').DataTable({
+    <!-- Inisialisasi DataTables -->
+    <script>
+        $(document).ready(function () {
 
-        language: {
-            search: "Cari:",
-            lengthMenu: "Tampilkan _MENU_ data",
-            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
-            infoEmpty: "Tidak ada data tahun ajaran",
-            zeroRecords: "Data tahun ajaran tidak ditemukan",
-            emptyTable: "Belum ada data tahun ajaran",
+            $('#tabelTahunAjaran').DataTable({
 
-            paginate: {
-                first: "Pertama",
-                last: "Terakhir",
-                next: "Berikutnya",
-                previous: "Sebelumnya"
-            }
-        },
+                language: {
+                    search: "Cari:",
+                    lengthMenu: "Tampilkan _MENU_ data",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    infoEmpty: "Tidak ada data tahun ajaran",
+                    infoFiltered: "(difilter dari _MAX_ total data)",
+                    zeroRecords: "Data tahun ajaran tidak ditemukan",
+                    emptyTable: "Belum ada data tahun ajaran",
 
-        pageLength: 10,
+                    paginate: {
+                        first: "Pertama",
+                        last: "Terakhir",
+                        next: "Berikutnya",
+                        previous: "Sebelumnya"
+                    }
+                },
 
-        lengthMenu: [5, 10, 25, 50, 100],
+                pageLength: 10,
 
-        order: [[2, 'desc']]
-    });
+                lengthMenu: [5, 10, 25, 50, 100],
 
-});
-</script>
+                // Urutkan berdasarkan tanggal mulai terbaru
+                order: [[2, 'desc']],
+
+                columnDefs: [
+                    {
+                        targets: [0, 7],
+                        orderable: false,
+                        searchable: false
+                    }
+                ],
+
+                // Nomor urut otomatis
+                drawCallback: function () {
+
+                    var api = this.api();
+                    var info = api.page.info();
+
+                    api.column(0, {
+                        page: 'current'
+                    }).nodes().each(function (cell, i) {
+
+                        cell.innerHTML = info.start + i + 1;
+
+                    });
+
+                }
+
+            });
+
+        });
+    </script>
 
 </body>
+
 </html>
