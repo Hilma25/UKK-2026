@@ -26,6 +26,7 @@ $query_kelas = mysqli_query($koneksi, "
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
+
 <div class="container-fluid">
     <div class="row">
 
@@ -42,25 +43,20 @@ $query_kelas = mysqli_query($koneksi, "
                 </a>
             </div>
      
-        <!-- FORM TAMBAH SISWA -->
-            <div class="card shadow-sm mb-4">
-            <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Form Tambah Siswa</h5>
-         </div>
-        </div>
 
-        <!-- Form -->
-        <div class="card-body p-4">
+<!-- FORM TAMBAH SISWA -->
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Form Tambah Siswa</h5>
+    </div>
 
-            <form action="proses_tambah_siswa.php" method="POST">
+    <div class="card-body p-3">
+        <form action="proses_tambah_siswa.php" method="POST">
 
-                <div class="row g-2">
-
-  <!-- NIS -->
+            <!-- NIS -->
             <div class="mb-2">
-                <label for="nis" class="form-label">NIS</label>
-                <input type="text" name="nis"
-                    id="nis"
+                <label for="nis" class="form-label mb-1">NIS</label>
+                <input type="text" name="nis" id="nis"
                     class="form-control"
                     maxlength="10"
                     pattern="[0-9]{1,10}"
@@ -72,9 +68,8 @@ $query_kelas = mysqli_query($koneksi, "
 
             <!-- NISN -->
             <div class="mb-2">
-                <label for="nisn" class="form-label">NISN</label>
-                <input type="text" name="nisn"
-                    id="nisn"
+                <label for="nisn" class="form-label mb-1">NISN</label>
+                <input type="text" name="nisn" id="nisn"
                     class="form-control"
                     maxlength="10"
                     pattern="[0-9]{1,10}"
@@ -83,24 +78,21 @@ $query_kelas = mysqli_query($koneksi, "
                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
                     required>
             </div>
-                        <!-- Nama Siswa -->
+
+            <!-- Nama Siswa -->
             <div class="mb-2">
-                <label for="nama" class="form-label">Nama Siswa</label>
-                <input type="text" name="nama"
-                    id="nama"
-                    class="form-control"
-                    required>
+                <label for="nama" class="form-label mb-1">Nama Siswa</label>
+                <input type="text" name="nama" id="nama"
+                    class="form-control" required>
             </div>
 
             <!-- Jenis Kelamin -->
             <div class="mb-2">
-                <label for="jenis_kelamin" class="form-label">
+                <label for="jenis_kelamin" class="form-label mb-1">
                     Jenis Kelamin
                 </label>
-                <select name="jenis_kelamin"
-                    id="jenis_kelamin"
-                    class="form-select"
-                    required>
+                <select name="jenis_kelamin" id="jenis_kelamin"
+                    class="form-select" required>
                     <option value="">-- Pilih --</option>
                     <option value="L">Laki-laki</option>
                     <option value="P">Perempuan</option>
@@ -109,47 +101,41 @@ $query_kelas = mysqli_query($koneksi, "
 
             <!-- Tanggal Lahir -->
             <div class="mb-2">
-                <label for="tanggal_lahir" class="form-label">
+                <label for="tanggal_lahir" class="form-label mb-1">
                     Tanggal Lahir
                 </label>
                 <input type="date" name="tanggal_lahir"
                     id="tanggal_lahir"
-                    class="form-control"
-                    required>
+                    class="form-control" required>
             </div>
 
             <!-- Alamat -->
             <div class="mb-2">
-                <label for="alamat" class="form-label">Alamat</label>
-                <textarea name="alamat"
-                    id="alamat"
+                <label for="alamat" class="form-label mb-1">Alamat</label>
+                <textarea name="alamat" id="alamat"
                     class="form-control"
-                    rows="4"
-                    required></textarea>
+                    rows="3" required></textarea>
             </div>
 
             <!-- Status Aktif -->
             <div class="mb-2">
-                <label for="status_aktif" class="form-label">
+                <label for="status_aktif" class="form-label mb-1">
                     Status Aktif
                 </label>
-                <select name="status_aktif"
-                    id="status_aktif"
-                    class="form-select"
-                    required>
+                <select name="status_aktif" id="status_aktif"
+                    class="form-select" required>
                     <option value="1">Aktif</option>
                     <option value="0">Tidak Aktif</option>
                 </select>
             </div>
-                </div>
+
 
                 <!-- Tombol -->
-                <div class="mt-4">
-                    <button type="submit" class="btn btn-primary px-4">
-                        <i class="bi bi-save me-1"></i>
-                        Simpan Siswa
-                    </button>
-
+                <button type="submit" name="simpan" value="1" class="btn btn-primary px-4">
+                    <i class="bi bi-save me-1"></i>
+                    Simpan Siswa
+                </button>
+                
                     <button type="reset" class="btn btn-outline-secondary px-4 ms-1">
                         <i class="bi bi-arrow-counterclockwise me-1"></i>
                         Reset

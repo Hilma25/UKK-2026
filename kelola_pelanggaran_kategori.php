@@ -32,10 +32,10 @@ $hasil = mysqli_query($koneksi, $sql);
 
         <?php include 'layout/sidebar.php'; ?>
 
-        <!-- KONTEN -->
+       <!-- KONTEN -->
         <main class="col-md-9 col-lg-10 p-4">
 
-            <h2 class="mb-4">Kelola Kategori Pelanggaran</h2>
+            <h1 class="mb-4">Kelola Kategori Pelanggaran</h1>
 
             <!-- Tombol Navigasi -->
             <div class="mb-3">

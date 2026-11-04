@@ -208,15 +208,14 @@ $(document).ready(function () {
 
     });
 
-    // Fungsi nomor urut otomatis
+      // Fungsi nomor urut otomatis
     function nomorUrut() {
 
         var informasi = tabel.page.info();
 
         tabel
             .column(0, {
-                search: 'applied',
-                order: 'applied'
+                page: 'current'
             })
             .nodes()
             .each(function (cell, i) {
@@ -231,7 +230,7 @@ $(document).ready(function () {
         nomorUrut();
     });
 
-    // Tampilkan nomor urut saat halaman pertama dibuka
+    // Tampilkan nomor urut saat pertama kali dibuka
     nomorUrut();
 
 });

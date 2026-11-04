@@ -226,7 +226,8 @@ if (!$hasil) {
         <!-- KONTEN UTAMA -->
         <main class="col-md-9 col-lg-10 p-4">
 
-            <h3 class="judul-halaman">Laporan Pelanggaran Siswa</h3>
+
+             <h1 class="mb-4">Laporan Pelanggaran Siswa</h1>
 
             <div class="card">
 

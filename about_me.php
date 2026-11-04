@@ -27,7 +27,7 @@ include 'includes/cek_session.php';
             <main class="col-md-9 col-lg-10 p-4">
 
                 <!-- Judul Halaman -->
-                <h2 class="mb-3">About Me</h2>
+                <h1 class="mb-4">About Me</h1>
 
                 <p class="text-muted mb-4">
                     Kenali lebih dekat profil pembuat aplikasi.
@@ -56,7 +56,7 @@ include 'includes/cek_session.php';
                                 <img
                                     src="assets/foto_profil.jpg"
                                     alt="Foto Profil"
-                                    class="img-fluid rounded-circle img-thumbnail mb-3"
+                                    class="img-fluid rounded-4 img-thumbnail mb-3"
                                     width="220">
 
                                 <h4>Hilma Himmatunnajah</h4>
@@ -132,10 +132,10 @@ include 'includes/cek_session.php';
                         </h5>
 
                         <p>
-                            Aplikasi ini merupakan sistem pengelolaan pelanggaran
-                            siswa yang dibuat untuk membantu proses pengelolaan
-                            data kategori pelanggaran, jenis pelanggaran, dan
-                            informasi terkait secara lebih terstruktur dan efisien.
+                           Aplikasi ini merupakan sistem informasi pengelolaan pelanggaran siswa yang dirancang untuk mempermudah proses pencatatan,
+                           pengelolaan, dan pemantauan data pelanggaran di lingkungan sekolah. Sistem ini menyediakan pengelolaan kategori pelanggaran, 
+                           jenis pelanggaran, serta informasi terkait siswa secara terstruktur sehingga proses administrasi menjadi lebih efektif, 
+                           praktis, dan efisien.
                         </p>
 
                     </div>
