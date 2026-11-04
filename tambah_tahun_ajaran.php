@@ -1,6 +1,16 @@
 <?php
 // tambah_tahun_ajaran.php
 include 'includes/cek_session.php';
+$pesan = $_GET['pesan'] ?? '';
+$notifikasi = '';
+
+if ($pesan == 'aktif_ada') {
+    $notifikasi = 'Gagal! Sudah ada tahun ajaran yang berstatus Aktif.';
+} elseif ($pesan == 'berhasil') {
+    $notifikasi = 'Tahun ajaran berhasil ditambahkan.';
+} elseif ($pesan == 'gagal') {
+    $notifikasi = 'Tahun ajaran gagal ditambahkan.';
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +21,14 @@ include 'includes/cek_session.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Tambah Tahun Ajaran</title>
+    <?php if ($notifikasi != '') { ?>
+    <div class="alert alert-danger alert-dismissible fade show">
+        <?= htmlspecialchars($notifikasi) ?>
+
+        <button type="button" class="btn-close"
+                data-bs-dismiss="alert"></button>
+    </div>
+<?php } ?>
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -102,16 +120,18 @@ include 'includes/cek_session.php';
                             </select>
                         </div>
 
-                        <!-- Tombol Simpan -->
-                        <button type="submit" class="btn btn-primary">
-                            Simpan
-                        </button>
+                       <!-- Tombol -->
+                <div class="mt-4">
 
-                        <a href="kelola_tahun_ajaran.php"
-                           class="btn btn-secondary">
-                            Batal
-                        </a>
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-save me-1"></i>
+                        Simpan Tahun Ajaran
+                    </button>
 
+                    <button type="reset" class="btn btn-outline-secondary px-4 ms-1">
+                        <i class="bi bi-arrow-counterclockwise me-1"></i>
+                        Reset
+                    </button>
                     </form>
 
                 </div>

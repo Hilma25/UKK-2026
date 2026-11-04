@@ -97,15 +97,17 @@ include 'includes/cek_session.php';
                         </div>
 
                         <!-- Tombol -->
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary">
-                                Simpan Kategori
-                            </button>
+                <div class="mt-4">
 
-                            <a href="kelola_pelanggaran_kategori.php"
-                               class="btn btn-secondary">
-                                Batal
-                            </a>
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-save me-1"></i>
+                        Simpan Pelanggaran Kategori
+                    </button>
+
+                    <button type="reset" class="btn btn-outline-secondary px-4 ms-1">
+                        <i class="bi bi-arrow-counterclockwise me-1"></i>
+                        Reset
+                    </button>
                         </div>
 
                     </form>

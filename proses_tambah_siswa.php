@@ -1,7 +1,22 @@
 <?php
-// proses_tambah_siswa.php
-include 'includes/cek_session.php';
+
+session_start();
 include 'config/koneksi.php';
+
+if (!isset($_SESSION['login'])) {
+    header("Location: login.php");
+    exit;
+}
+
+if ($_SESSION['role'] != 'admin') {
+    echo "Akses ditolak!";
+    exit;
+}
+
+if (!isset($_POST['simpan'])) {
+    header("Location: tambah_siswa.php");
+    exit;
+}
 
 $nis = $_POST['nis'];
 $nisn = $_POST['nisn'];
@@ -12,9 +27,25 @@ $alamat = $_POST['alamat'];
 $status_aktif = $_POST['status_aktif'];
 
 $sql = "INSERT INTO t_siswa
-        (nis, nisn, nama, jenis_kelamin, tanggal_lahir, alamat, status_aktif)
+        (
+            nis,
+            nisn,
+            nama,
+            jenis_kelamin,
+            tanggal_lahir,
+            alamat,
+            status_aktif
+        )
         VALUES
-        ('$nis', '$nisn', '$nama', '$jenis_kelamin', '$tanggal_lahir', '$alamat', '$status_aktif')";
+        (
+            '$nis',
+            '$nisn',
+            '$nama',
+            '$jenis_kelamin',
+            '$tanggal_lahir',
+            '$alamat',
+            '$status_aktif'
+        )";
 
 if (mysqli_query($koneksi, $sql)) {
 
@@ -23,7 +54,8 @@ if (mysqli_query($koneksi, $sql)) {
 
 } else {
 
-    echo "Gagal menambahkan data siswa: " . mysqli_error($koneksi);
-
+    echo "Gagal menambahkan siswa: "
+         . mysqli_error($koneksi);
 }
+
 ?>

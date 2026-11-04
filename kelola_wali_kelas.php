@@ -43,7 +43,7 @@ $hasil = mysqli_query($koneksi, $sql);
 
             <!-- KONTEN -->
             <main class="col-md-9 col-lg-10 p-4">
-                <h1 class="mb-4">Kelola Wali K</h1>
+                <h1 class="mb-4">Kelola Wali Kelas</h1>
 
 
                 <!-- Tombol Navigasi -->
@@ -54,7 +54,7 @@ $hasil = mysqli_query($koneksi, $sql);
                     </a>
 
                     <a href="tambah_wali_kelas.php" class="btn btn-primary">
-                         Tambah Wali Kelas
+                         + Tambah Wali Kelas
                     </a>
 
                 </div>

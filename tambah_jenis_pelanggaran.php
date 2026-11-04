@@ -175,17 +175,18 @@ if (!$kategori) {
                             </select>
                         </div>
 
-                        <!-- Tombol -->
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary">
-                                Simpan Jenis Pelanggaran
-                            </button>
+                       <!-- Tombol -->
+                <div class="mt-4">
 
-                            <a href="kelola_jenis_pelanggaran.php"
-                               class="btn btn-secondary">
-                                Batal
-                            </a>
-                        </div>
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-save me-1"></i>
+                        Simpan Jenis Pelanggaran 
+                    </button>
+
+                    <button type="reset" class="btn btn-outline-secondary px-4 ms-1">
+                        <i class="bi bi-arrow-counterclockwise me-1"></i>
+                        Reset
+                    </button>
 
                     </form>
 

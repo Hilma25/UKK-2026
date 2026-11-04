@@ -193,16 +193,18 @@ $guru = mysqli_query(
 
                             </select>
                         </div>
+                <!-- Tombol -->
+                <div class="mt-4">
 
-                        <!-- TOMBOL -->
-                        <button type="submit" class="btn btn-primary">
-                            Simpan Wali Kelas
-                        </button>
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-save me-1"></i>
+                        Simpan Wali Kelas
+                    </button>
 
-                        <a href="kelola_wali_kelas.php"
-                           class="btn btn-secondary">
-                            Batal
-                        </a>
+                    <button type="reset" class="btn btn-outline-secondary px-4 ms-1">
+                        <i class="bi bi-arrow-counterclockwise me-1"></i>
+                        Reset
+                    </button>
 
                     </form>
 

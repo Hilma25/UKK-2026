@@ -1,31 +1,32 @@
 <?php
-// tambah_siswa.php
-include 'includes/cek_session.php';
+session_start();
+include 'config/koneksi.php';
+
+if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
+    header("Location: login.php");
+    exit;
+}
+
+// Mengambil data kelas
+$query_kelas = mysqli_query($koneksi, "
+    SELECT id, nama
+    FROM t_kelas
+    ORDER BY nama ASC
+");
 ?>
 
 <!DOCTYPE html>
-<html>
-
+<html lang="id">
 <head>
-
-     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tambah Siswa</title>
 
-     <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-          rel="stylesheet">
-
-    <!-- DataTables Bootstrap 5 -->
-    <link href="https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.min.css"
-          rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
-<body>
-
-    <div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
 
         <?php include 'layout/sidebar.php'; ?>
@@ -33,26 +34,30 @@ include 'includes/cek_session.php';
         <!-- KONTEN -->
         <main class="col-md-9 col-lg-10 p-4">
 
-             <h1>Tambah Siswa</h1>
+            <h1 class="mb-4">Tambah Siswa</h1>
 
             <div class="mb-3">
-                <a href="kelola_siswa.php" class="btn btn-secondary mb-3">
+                <a href="kelola_siswa.php" class="btn btn-secondary">
                     Kembali ke Data Siswa
                 </a>
             </div>
-
      
-<!-- FORM TAMBAH SISWA -->
-<div class="card shadow-sm mb-4">
-    <div class="card-header bg-primary text-white">
-        <h5 class="mb-0">Form Tambah Siswa</h5>
-    </div>
+        <!-- FORM TAMBAH SISWA -->
+            <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Form Tambah Siswa</h5>
+         </div>
+        </div>
 
-    <div class="card-body">
-        <form action="proses_tambah_siswa.php" method="POST">
+        <!-- Form -->
+        <div class="card-body p-4">
 
-            <!-- NIS -->
-            <div class="mb-3">
+            <form action="proses_tambah_siswa.php" method="POST">
+
+                <div class="row g-2">
+
+  <!-- NIS -->
+            <div class="mb-2">
                 <label for="nis" class="form-label">NIS</label>
                 <input type="text" name="nis"
                     id="nis"
@@ -66,7 +71,7 @@ include 'includes/cek_session.php';
             </div>
 
             <!-- NISN -->
-            <div class="mb-3">
+            <div class="mb-2">
                 <label for="nisn" class="form-label">NISN</label>
                 <input type="text" name="nisn"
                     id="nisn"
@@ -78,9 +83,8 @@ include 'includes/cek_session.php';
                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
                     required>
             </div>
-
-            <!-- Nama Siswa -->
-            <div class="mb-3">
+                        <!-- Nama Siswa -->
+            <div class="mb-2">
                 <label for="nama" class="form-label">Nama Siswa</label>
                 <input type="text" name="nama"
                     id="nama"
@@ -89,7 +93,7 @@ include 'includes/cek_session.php';
             </div>
 
             <!-- Jenis Kelamin -->
-            <div class="mb-3">
+            <div class="mb-2">
                 <label for="jenis_kelamin" class="form-label">
                     Jenis Kelamin
                 </label>
@@ -104,7 +108,7 @@ include 'includes/cek_session.php';
             </div>
 
             <!-- Tanggal Lahir -->
-            <div class="mb-3">
+            <div class="mb-2">
                 <label for="tanggal_lahir" class="form-label">
                     Tanggal Lahir
                 </label>
@@ -115,7 +119,7 @@ include 'includes/cek_session.php';
             </div>
 
             <!-- Alamat -->
-            <div class="mb-3">
+            <div class="mb-2">
                 <label for="alamat" class="form-label">Alamat</label>
                 <textarea name="alamat"
                     id="alamat"
@@ -125,7 +129,7 @@ include 'includes/cek_session.php';
             </div>
 
             <!-- Status Aktif -->
-            <div class="mb-3">
+            <div class="mb-2">
                 <label for="status_aktif" class="form-label">
                     Status Aktif
                 </label>
@@ -137,20 +141,45 @@ include 'includes/cek_session.php';
                     <option value="0">Tidak Aktif</option>
                 </select>
             </div>
+                </div>
 
-            <!-- Tombol Simpan -->
-            <button type="submit" class="btn btn-primary">
-                Simpan
-            </button>
+                <!-- Tombol -->
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-save me-1"></i>
+                        Simpan Siswa
+                    </button>
 
-        </form>
+                    <button type="reset" class="btn btn-outline-secondary px-4 ms-1">
+                        <i class="bi bi-arrow-counterclockwise me-1"></i>
+                        Reset
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
     </div>
+
 </div>
 
+<!-- Membatasi NIS dan NISN maksimal 10 angka -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
 
+    const nis = document.getElementById('nis');
+    const nisn = document.getElementById('nisn');
 
-        </table>
+    nis.addEventListener('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+    });
 
-    </form>
+    nisn.addEventListener('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+    });
+
+});
+</script>
+
 </body>
 </html>
