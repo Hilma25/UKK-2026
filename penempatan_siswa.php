@@ -1,3 +1,4 @@
+
 <?php
 // penempatan_siswa.php
 
@@ -183,6 +184,7 @@ $hasil = mysqli_query($koneksi, $sql);
                                 </select>
 
                             </div>
+
                             <!-- PILIH TAHUN AJARAN -->
                             <div class="col-md-6 mb-3">
 
@@ -305,7 +307,7 @@ $hasil = mysqli_query($koneksi, $sql);
             <!-- TABEL DATA PENEMPATAN -->
             <div class="card shadow-sm">
 
-                <div class="card-header">
+                <div class="card-header bg-dark text-white">
                     <h5 class="mb-0">Data Penempatan Siswa</h5>
                 </div>
 
@@ -333,71 +335,61 @@ $hasil = mysqli_query($koneksi, $sql);
 
                             <tbody>
 
-                            <?php
-                            $no = 1;
+                                <?php while ($row = mysqli_fetch_assoc($hasil)) { ?>
 
-                            while ($row = mysqli_fetch_assoc($hasil)) {
-                            ?>
+                                    <tr>
+                                        <td></td>
 
-                                <tr>
+                                        <td>
+                                            <?= htmlspecialchars($row['nis'] ?? '-') ?>
+                                        </td>
 
-                                    <td>
-                                        <?= $no++ ?>
-                                    </td>
+                                        <td>
+                                            <?= htmlspecialchars($row['nama_siswa'] ?? '-') ?>
+                                        </td>
 
-                                    <td>
-                                        <?= htmlspecialchars($row['nis'] ?? '-') ?>
-                                    </td>
+                                        <td>
+                                            <?= htmlspecialchars($row['tahun_ajaran'] ?? '-') ?>
+                                        </td>
 
-                                    <td>
-                                        <?= htmlspecialchars($row['nama_siswa'] ?? '-') ?>
-                                    </td>
+                                        <td>
+                                            <?= htmlspecialchars($row['nama_kelas'] ?? '-') ?>
+                                        </td>
 
-                                    <td>
-                                        <?= htmlspecialchars($row['tahun_ajaran'] ?? '-') ?>
-                                    </td>
+                                        <td>
+                                            <?= htmlspecialchars($row['tingkat'] ?? '-') ?>
+                                        </td>
 
-                                    <td>
-                                        <?= htmlspecialchars($row['nama_kelas'] ?? '-') ?>
-                                    </td>
+                                        <td>
+                                            <?= htmlspecialchars($row['jurusan'] ?? '-') ?>
+                                        </td>
 
-                                    <td>
-                                        <?= htmlspecialchars($row['tingkat'] ?? '-') ?>
-                                    </td>
+                                        <td>
+                                            <?= htmlspecialchars($row['tanggal_mulai'] ?? '-') ?>
+                                        </td>
 
-                                    <td>
-                                        <?= htmlspecialchars($row['jurusan'] ?? '-') ?>
-                                    </td>
+                                        <td>
+                                            <?= htmlspecialchars($row['tanggal_selesai'] ?? '-') ?>
+                                        </td>
 
-                                    <td>
-                                        <?= htmlspecialchars($row['tanggal_mulai'] ?? '-') ?>
-                                    </td>
+                                        <td>
+                                            <?php if ($row['status_aktif'] == 1) { ?>
 
-                                    <td>
-                                        <?= htmlspecialchars($row['tanggal_selesai'] ?? '-') ?>
-                                    </td>
+                                                <span class="badge bg-success">
+                                                    Aktif
+                                                </span>
 
-                                    <td>
+                                            <?php } else { ?>
 
-                                        <?php if ($row['status_aktif'] == 1) { ?>
+                                                <span class="badge bg-danger">
+                                                    Tidak Aktif
+                                                </span>
 
-                                            <span class="badge bg-success">
-                                                Aktif
-                                            </span>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
 
-                                        <?php } else { ?>
-
-                                            <span class="badge bg-danger">
-                                                Tidak Aktif
-                                            </span>
-
-                                        <?php } ?>
-
-                                    </td>
-
-                                </tr>
-
-                            <?php } ?>
+                                <?php } ?>
 
                             </tbody>
 
@@ -451,7 +443,23 @@ $(document).ready(function () {
 
         lengthMenu: [5, 10, 25, 50, 100],
 
-        order: [[0, 'asc']]
+        order: [[2, 'asc']],
+
+        columnDefs: [
+            {
+                targets: 0,
+                orderable: false,
+                searchable: false
+            }
+        ],
+
+        drawCallback: function () {
+            var api = this.api();
+
+            api.column(0, { page: 'current' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1 + api.page.info().start;
+            });
+        }
 
     });
 

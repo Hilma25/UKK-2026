@@ -1,6 +1,6 @@
 <?php
-//buat_user_awal.php
-//jalankan file ini satu kali lewat browser untuk membuat user awal 
+//buat_user_guru.php
+//jalankan file ini satu kali lewat browser untuk membuat user guru 
 include 'config/koneksi.php';
 
 $name = 'guru';
@@ -12,7 +12,7 @@ $sql = "INSERT INTO t_users (name, email, password, role)";
 $sql .= "VALUES ('$name','$email','$password','$role')";
 
 if (mysqli_query($koneksi, $sql)) {
-    echo 'User admin berhasil dibuat. Silakan hapus file ini. ';
+    echo 'User guru berhasil dibuat. Silakan hapus file ini. ';
 } else {
     echo 'Gagal membuat user: ' . mysqli_error($koneksi);
 }

@@ -1,4 +1,3 @@
-
 <?php
 // Memeriksa session login
 include "includes/cek_session.php";
@@ -72,7 +71,15 @@ $total_kelas = hitungData($koneksi, 't_kelas');
             <h2>Dashboard</h2>
 
             <!-- Menampilkan data pengguna -->
-            <p>Selamat datang di halaman dashboard <b><?php echo htmlspecialchars($nama); ?></b></p>
+            <?php if ($role == 'guru') { ?>
+
+                <p>Selamat datang di halaman dashboard guru <b><?php echo htmlspecialchars($nama); ?></b></p>
+
+            <?php } else { ?>
+
+                <p>Selamat datang di halaman dashboard <b><?php echo htmlspecialchars($nama); ?></b></p>
+
+            <?php } ?>
 
             <?php if ($role == 'admin') { ?>
 
@@ -127,6 +134,7 @@ $total_kelas = hitungData($koneksi, 't_kelas');
                     </div>
 
                 </div>
+
 
             <?php } elseif ($role == 'guru') { ?>
 
