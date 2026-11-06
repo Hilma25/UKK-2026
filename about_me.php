@@ -1,3 +1,4 @@
+
 <?php
 // about_me.php
 
@@ -15,9 +16,12 @@ include 'includes/cek_session.php';
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+        rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-light">
 
     <div class="container-fluid">
         <div class="row">
@@ -26,124 +30,262 @@ include 'includes/cek_session.php';
 
             <main class="col-md-9 col-lg-10 p-4">
 
-                <!-- Judul Halaman -->
-                <h1 class="mb-4">About Me</h1>
-
-                <p class="text-muted mb-4">
-                    Kenali lebih dekat profil pembuat aplikasi.
-                </p>
-
-                <!-- Tombol Kembali -->
-                <div class="mb-4">
-                    <a href="dashboard.php" class="btn btn-secondary">
-                        Kembali ke Dashboard
-                    </a>
-                </div>
-
-                <!-- Card Profil -->
-                <div class="card shadow-sm">
-
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">Profil Saya</h5>
+                <!-- Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h2 class="fw-bold mb-1">About Me</h2>
+                        <p class="text-muted mb-0">
+                            Mengenal lebih dekat pembuat aplikasi.
+                        </p>
                     </div>
 
-                    <div class="card-body">
+                    <span class="badge bg-primary fs-6 p-2">
+                        <i class="bi bi-person-circle me-1"></i>
+                        Developer
+                    </span>
+                </div>
+
+                <!-- Profil Utama -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
 
                         <div class="row align-items-center">
 
-                            <!-- Foto Profil -->
-                            <div class="col-md-4 text-center mb-4">
-                                <img
-                                    src="assets/foto_profil.jpg"
-                                    alt="Foto Profil"
-                                    class="img-fluid rounded-4 img-thumbnail mb-3"
-                                    width="220">
+                            <!-- Foto -->
+                            <div class="col-lg-4 text-center mb-4 mb-lg-0">
 
-                                <h4>Hilma Himmatunnajah</h4>
+                                <img src="assets/foto_profil.jpg"
+                                     alt="Foto Profil"
+                                     class="img-fluid rounded-4 shadow-sm"
+                                     width="250">
 
-                                <p class="text-muted">
-                                    Siswa Rekayasa Perangkat Lunak
-                                </p>
+                                <div class="mt-3">
+                                    <span class="badge bg-success p-2">
+                                        <i class="bi bi-mortarboard me-1"></i>
+                                        Siswa RPL
+                                    </span>
+                                </div>
+
                             </div>
 
-                            <!-- Informasi Profil -->
-                            <div class="col-md-8">
+                            <!-- Perkenalan -->
+                            <div class="col-lg-8">
 
-                                <h5 class="text-primary mb-3">
-                                    Tentang Saya
+                                <span class="text-primary fw-semibold">
+                                    HALO, PERKENALKAN SAYA
+                                </span>
+
+                                <h1 class="fw-bold mt-2">
+                                    Hilma Himmatunnajah
+                                </h1>
+
+                                <h5 class="text-secondary mb-3">
+                                    Siswa Rekayasa Perangkat Lunak
                                 </h5>
 
-                                <p>
-                                    Halo! Perkenalkan, nama saya Hilma Himmatunnajah.
-                                    Saya merupakan siswa jurusan Rekayasa Perangkat
-                                    Lunak (RPL) yang tertarik mempelajari teknologi
-                                    dan pengembangan aplikasi berbasis web.
+                                <p class="text-muted">
+                                    Saya merupakan siswa SMK Muhammadiyah
+                                    Kota Tasikmalaya kelas XII RPL 1.
+                                    Saya memiliki ketertarikan dalam bidang
+                                    teknologi, khususnya pemrograman,
+                                    pengembangan website, pengelolaan database,
+                                    dan desain antarmuka aplikasi.
                                 </p>
 
-                                <hr>
-
-                                <h5 class="text-primary mb-3">
-                                    Informasi Pribadi
-                                </h5>
-
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <th width="35%">Nama</th>
-                                        <td>Hilma Himmatunnajah</td>
-                                    </tr>
-
-                                    <tr>
-                                        <th>Sekolah</th>
-                                        <td>SMK Muhammadiyah Kota Tasikmalaya</td>
-                                    </tr>
-
-                                    <tr>
-                                        <th>Kelas</th>
-                                        <td>XII RPL 1</td>
-                                    </tr>
-
-                                    <tr>
-                                        <th>Jurusan</th>
-                                        <td>Rekayasa Perangkat Lunak</td>
-                                    </tr>
-                                </table>
-
-                                <hr>
-
-                                <h5 class="text-primary mb-3">
-                                    Keahlian
-                                </h5>
-
-                                <span class="badge bg-primary">HTML</span>
-                                <span class="badge bg-primary">CSS</span>
-                                <span class="badge bg-primary">PHP</span>
-                                <span class="badge bg-primary">MySQL</span>
-                                <span class="badge bg-primary">Bootstrap</span>
+                                <p class="text-muted">
+                                    Melalui pembelajaran Rekayasa Perangkat
+                                    Lunak, saya terus mengembangkan kemampuan
+                                    untuk membuat aplikasi yang bermanfaat,
+                                    mudah digunakan, dan dapat membantu
+                                    menyelesaikan permasalahan sehari-hari.
+                                </p>
 
                             </div>
 
                         </div>
 
-                        <hr>
+                    </div>
+                </div>
 
-                        <!-- Tentang Aplikasi -->
-                        <h5 class="text-primary mb-3">
-                            Tentang Aplikasi
-                        </h5>
+                <!-- Informasi Pribadi -->
+                <h4 class="fw-bold mb-3">
+                    <i class="bi bi-person-vcard text-primary me-2"></i>
+                    Informasi Pribadi
+                </h4>
 
-                        <p>
-                           Aplikasi ini merupakan sistem informasi pengelolaan pelanggaran siswa yang dirancang untuk mempermudah proses pencatatan,
-                           pengelolaan, dan pemantauan data pelanggaran di lingkungan sekolah. Sistem ini menyediakan pengelolaan kategori pelanggaran, 
-                           jenis pelanggaran, serta informasi terkait siswa secara terstruktur sehingga proses administrasi menjadi lebih efektif, 
-                           praktis, dan efisien.
-                        </p>
+                <div class="row g-3 mb-4">
 
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <i class="bi bi-person-fill fs-3 text-primary"></i>
+                                <p class="text-muted mt-2 mb-1">Nama Lengkap</p>
+                                <h6 class="fw-bold">Hilma Himmatunnajah</h6>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="card-footer text-center text-muted">
-                        &copy; <?= date('Y'); ?> Hilma Himmatunnajah
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <i class="bi bi-building fs-3 text-primary"></i>
+                                <p class="text-muted mt-2 mb-1">Sekolah</p>
+                                <h6 class="fw-bold">SMK Muhammadiyah Kota Tasikmalaya</h6>
+                            </div>
+                        </div>
                     </div>
 
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <i class="bi bi-book fs-3 text-primary"></i>
+                                <p class="text-muted mt-2 mb-1">Kelas</p>
+                                <h6 class="fw-bold">XII RPL 1</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <i class="bi bi-code-slash fs-3 text-primary"></i>
+                                <p class="text-muted mt-2 mb-1">Jurusan</p>
+                                <h6 class="fw-bold">Rekayasa Perangkat Lunak</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Keahlian -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+
+                        <div class="row align-items-center">
+
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <h4 class="fw-bold">
+                                    <i class="bi bi-lightbulb text-primary me-2"></i>
+                                    Keahlian
+                                </h4>
+
+                                <p class="text-muted mb-0">
+                                    Teknologi dan keterampilan yang
+                                    saya pelajari.
+                                </p>
+                            </div>
+
+                            <div class="col-md-8">
+
+                                <span class="badge bg-primary fs-6 p-2 m-1">HTML</span>
+                                <span class="badge bg-primary fs-6 p-2 m-1">CSS</span>
+                                <span class="badge bg-primary fs-6 p-2 m-1">PHP</span>
+                                <span class="badge bg-success fs-6 p-2 m-1">MySQL</span>
+                                <span class="badge bg-info text-dark fs-6 p-2 m-1">Bootstrap</span>
+                                <span class="badge bg-warning text-dark fs-6 p-2 m-1">JavaScript</span>
+                                <span class="badge bg-secondary fs-6 p-2 m-1">Design</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Tentang Aplikasi -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+
+                        <div class="row">
+
+                            <div class="col-md-2 text-center mb-3 mb-md-0">
+                                <i class="bi bi-laptop display-3 text-primary"></i>
+                            </div>
+
+                            <div class="col-md-10">
+
+                                <h4 class="fw-bold">
+                                    Tentang Aplikasi
+                                </h4>
+
+                                <p class="text-muted">
+                                    Aplikasi Pelanggaran Siswa merupakan
+                                    sistem informasi berbasis web yang
+                                    dirancang untuk mempermudah proses
+                                    pencatatan, pengelolaan, dan pemantauan
+                                    data pelanggaran siswa di lingkungan
+                                    sekolah.
+                                </p>
+
+                                <p class="text-muted mb-0">
+                                    Sistem ini menyediakan pengelolaan data
+                                    siswa, guru, kelas, tahun ajaran,
+                                    wali kelas, kategori pelanggaran,
+                                    penempatan siswa, tindakan, riwayat,
+                                    serta rekapitulasi poin pelanggaran
+                                    siswa agar administrasi sekolah menjadi
+                                    lebih efektif dan terstruktur.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Tujuan Aplikasi -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body p-4">
+
+                        <h4 class="fw-bold mb-3">
+                            <i class="bi bi-bullseye text-primary me-2"></i>
+                            Tujuan Pembuatan Aplikasi
+                        </h4>
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2 fs-5"></i>
+                                    <span>Mempermudah pencatatan pelanggaran siswa.</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2 fs-5"></i>
+                                    <span>Mengelola data siswa dan guru secara terstruktur.</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2 fs-5"></i>
+                                    <span>Memantau poin pelanggaran setiap siswa.</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="d-flex">
+                                    <i class="bi bi-check-circle-fill text-success me-2 fs-5"></i>
+                                    <span>Menyediakan riwayat dan laporan pelanggaran.</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="text-center text-muted mt-4 mb-3">
+                    <small>
+                        &copy; 2026 Aplikasi Pelanggaran Siswa
+                        <br>
+                        Created by <strong>Hilma Himmatunnajah</strong>
+                        <i class="bi bi-heart-fill text-danger"></i>
+                    </small>
                 </div>
 
             </main>

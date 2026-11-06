@@ -78,21 +78,27 @@ include 'includes/cek_session.php';
                             </select>
                         </div>
 
+                        
                         <!-- Jurusan -->
                         <div class="mb-3">
                             <label for="jurusan" class="form-label">
                                 Jurusan
                             </label>
 
-                            <input type="text"
-                                   name="jurusan"
-                                   id="jurusan"
-                                   class="form-control"
-                                   maxlength="100"
-                                   placeholder="Contoh: RPL"
-                                   required>
+                            <select name="jurusan"
+                                    id="jurusam"
+                                    class="form-select"
+                                    required>
+                                <option value="">-- Pilih Jurusan --</option>
+                                <option value="TKR">TKR</option>
+                                <option value="TSM">TSM</option>
+                                <option value="RPL">RPL</option>
+                                 <option value="TKJ">TKJ</option>
+                                  <option value="BDPM">BDPM</option>
+                            </select>
                         </div>
 
+        
                         <!-- Status Aktif -->
                         <div class="mb-3">
                             <label for="status_aktif" class="form-label">

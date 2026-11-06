@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 include 'config/koneksi.php';
@@ -76,6 +77,28 @@ if (mysqli_num_rows($hasil) > 0) {
 }
 mysqli_stmt_close($stmt);
 
+
+// CEK TAHUN AJARAN AKTIF
+if ($status_aktif == 1) {
+
+    $cek_aktif = mysqli_query(
+        $koneksi,
+        "SELECT id FROM t_tahun_ajaran
+         WHERE status_aktif = 1
+         LIMIT 1"
+    );
+
+    if (mysqli_num_rows($cek_aktif) > 0) {
+
+        $_SESSION['pesan_error'] =
+            "Gagal! Sudah ada tahun ajaran yang berstatus Aktif. Silakan pilih Tidak Aktif.";
+
+        header("Location: tambah_tahun_ajaran.php");
+        exit;
+    }
+}
+
+
 // Simpan data
 $stmt = mysqli_prepare(
     $koneksi,
@@ -83,6 +106,7 @@ $stmt = mysqli_prepare(
         (nama, tanggal_mulai, tanggal_selesai, status_aktif)
      VALUES (?, ?, ?, ?)"
 );
+
 mysqli_stmt_bind_param(
     $stmt,
     "sssi",
