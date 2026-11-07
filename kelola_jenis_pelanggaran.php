@@ -1,4 +1,3 @@
-
 <?php
 // kelola_jenis_pelanggaran.php
 
@@ -143,7 +142,6 @@ if (!$hasil) {
 
                                 <tr>
                                     <th>No</th>
-                                    <th>ID</th>
                                     <th>Kategori</th>
                                     <th>Kode</th>
                                     <th>Nama Pelanggaran</th>
@@ -166,10 +164,6 @@ if (!$hasil) {
 
                                         <!-- Nomor urut otomatis -->
                                         <td></td>
-
-                                        <td>
-                                            <?= (int) $row['id']; ?>
-                                        </td>
 
                                         <td>
                                             <?= htmlspecialchars($row['nama_kategori'] ?? '-'); ?>
@@ -301,15 +295,15 @@ $(document).ready(function () {
 
         },
 
-        pageLength: 10,
+        pageLength: 9,
 
-        lengthMenu: [5, 10, 25, 50, 100],
+        lengthMenu: [5, 9, 25, 50, 100],
 
         order: [[4, 'asc']],
 
         columnDefs: [
             {
-                targets: [0, 10],
+                targets: [0, 9],
                 orderable: false,
                 searchable: false
             }

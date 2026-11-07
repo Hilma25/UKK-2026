@@ -1,3 +1,4 @@
+
 <?php
 // kelola_pelanggaran_kategori.php
 
@@ -80,7 +81,6 @@ $hasil = mysqli_query($koneksi, $sql);
                             <thead class="table-dark">
                                 <tr>
                                     <th>No</th>
-                                    <th>ID</th>
                                     <th>Nama Kategori</th>
                                     <th>Deskripsi</th>
                                     <th>Status Aktif</th>
@@ -92,15 +92,12 @@ $hasil = mysqli_query($koneksi, $sql);
 
                             <tbody>
                                 <?php
-                                $no = 1;
-
                                 if ($hasil && mysqli_num_rows($hasil) > 0) {
                                     while ($row = mysqli_fetch_assoc($hasil)) {
                                 ?>
                                     <tr>
-                                        <td><?= $no++; ?></td>
-
-                                        <td><?= (int) $row['id']; ?></td>
+                                        <!-- Nomor urut otomatis -->
+                                        <td></td>
 
                                         <td>
                                             <?= htmlspecialchars($row['nama'] ?? ''); ?>
@@ -170,7 +167,9 @@ $hasil = mysqli_query($koneksi, $sql);
 <!-- Konfigurasi DataTables -->
 <script>
 $(document).ready(function () {
-    $('#tabelKategori').DataTable({
+
+    var tabel = $('#tabelKategori').DataTable({
+
         language: {
             search: "Cari:",
             lengthMenu: "Tampilkan _MENU_ data",
@@ -179,6 +178,7 @@ $(document).ready(function () {
             infoFiltered: "(difilter dari _MAX_ total data)",
             zeroRecords: "Data tidak ditemukan",
             emptyTable: "Belum ada data kategori pelanggaran",
+
             paginate: {
                 first: "Pertama",
                 last: "Terakhir",
@@ -188,20 +188,40 @@ $(document).ready(function () {
         },
 
         pageLength: 10,
+
         lengthMenu: [5, 10, 25, 50, 100],
 
-        // Urutkan berdasarkan ID terbesar
+        // Urutkan berdasarkan nama kategori secara descending
         order: [[1, 'desc']],
 
-        // Kolom aksi tidak bisa diurutkan atau dicari
+        // Kolom nomor dan aksi tidak bisa diurutkan atau dicari
         columnDefs: [
             {
-                targets: 7,
+                targets: [0, 6],
                 orderable: false,
                 searchable: false
             }
-        ]
+        ],
+
+        // Nomor urut otomatis
+        drawCallback: function () {
+
+            var api = this.api();
+
+            var info = api.page.info();
+
+            api.column(0, {
+                page: 'current'
+            }).nodes().each(function (cell, i) {
+
+                cell.innerHTML = info.start + i + 1;
+
+            });
+
+        }
+
     });
+
 });
 </script>
 

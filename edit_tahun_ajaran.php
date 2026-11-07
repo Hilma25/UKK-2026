@@ -1,19 +1,20 @@
+
 <?php
 // edit_tahun_ajaran.php
 include 'includes/cek_session.php';
 include 'config/koneksi.php';
 
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    die("ID tahun ajaran tidak valid.");
+// Ambil ID tahun ajaran
+$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+
+if ($id <= 0) {
+    $_SESSION['pesan_error'] = "ID tahun ajaran tidak valid.";
+    header("Location: kelola_tahun_ajaran.php");
+    exit;
 }
 
-$id = (int) $_GET['id'];
-
-$stmt = mysqli_prepare(
-    $koneksi,
-    "SELECT * FROM t_tahun_ajaran WHERE id = ?"
-);
-
+// Ambil data tahun ajaran
+$stmt = mysqli_prepare($koneksi, "SELECT * FROM t_tahun_ajaran WHERE id = ?");
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
 
@@ -21,7 +22,9 @@ $hasil = mysqli_stmt_get_result($stmt);
 $data = mysqli_fetch_assoc($hasil);
 
 if (!$data) {
-    die("Data tahun ajaran tidak ditemukan.");
+    $_SESSION['pesan_error'] = "Data tahun ajaran tidak ditemukan.";
+    header("Location: kelola_tahun_ajaran.php");
+    exit;
 }
 ?>
 
@@ -34,7 +37,6 @@ if (!$data) {
 
     <title>Edit Tahun Ajaran</title>
 
-    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel="stylesheet">
 </head>
@@ -44,14 +46,38 @@ if (!$data) {
 <div class="container-fluid">
     <div class="row">
 
-        <!-- SIDEBAR -->
+        <!-- Sidebar -->
         <?php include 'layout/sidebar.php'; ?>
 
-        <!-- KONTEN UTAMA -->
+        <!-- Konten Utama -->
         <main class="col-md-9 col-lg-10 p-4">
 
-            <h1 class="mb-4">Edit Tahun Ajaran</h1>
+            <!-- Judul dan Tombol Kembali -->
+            <div class="mb-4">
+                <h2 class="mb-3">Edit Tahun Ajaran</h2>
 
+                <a href="kelola_tahun_ajaran.php" class="btn btn-secondary">
+                    Kembali ke Data Tahun Ajaran
+                </a>
+            </div>
+
+            <!-- Pesan Error -->
+            <?php if (isset($_SESSION['pesan_error'])): ?>
+                <div class="alert alert-danger alert-dismissible fade show"
+                     role="alert">
+
+                    <?= htmlspecialchars($_SESSION['pesan_error']); ?>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </div>
+
+                <?php unset($_SESSION['pesan_error']); ?>
+            <?php endif; ?>
+
+            <!-- Form Edit Tahun Ajaran -->
             <div class="card shadow-sm">
 
                 <div class="card-header bg-primary text-white">
@@ -60,84 +86,90 @@ if (!$data) {
 
                 <div class="card-body">
 
-                    <form action="proses_edit_tahun_ajaran.php"
-                          method="POST"
-                          id="formEditTahunAjaran">
+                    <form action="proses_edit_tahun_ajaran.php" method="POST">
 
                         <input type="hidden"
                                name="id"
-                               value="<?= htmlspecialchars((string)$data['id']) ?>">
+                               value="<?= (int) $data['id']; ?>">
 
+                        <!-- Nama Tahun Ajaran -->
                         <div class="mb-3">
                             <label for="nama" class="form-label">
                                 Nama Tahun Ajaran
                             </label>
 
                             <input type="text"
-                                   name="nama"
-                                   id="nama"
                                    class="form-control"
-                                   value="<?= htmlspecialchars($data['nama'] ?? '') ?>"
+                                   id="nama"
+                                   name="nama"
+                                   value="<?= htmlspecialchars($data['nama'] ?? ''); ?>"
+                                   placeholder="Contoh: 2026/2027"
                                    required>
                         </div>
 
+                        <!-- Tanggal Mulai -->
                         <div class="mb-3">
                             <label for="tanggal_mulai" class="form-label">
                                 Tanggal Mulai
                             </label>
 
                             <input type="date"
-                                   name="tanggal_mulai"
-                                   id="tanggal_mulai"
                                    class="form-control"
-                                   value="<?= htmlspecialchars($data['tanggal_mulai'] ?? '') ?>"
+                                   id="tanggal_mulai"
+                                   name="tanggal_mulai"
+                                   value="<?= htmlspecialchars($data['tanggal_mulai'] ?? ''); ?>"
                                    required>
                         </div>
 
+                        <!-- Tanggal Selesai -->
                         <div class="mb-3">
                             <label for="tanggal_selesai" class="form-label">
                                 Tanggal Selesai
                             </label>
 
                             <input type="date"
-                                   name="tanggal_selesai"
-                                   id="tanggal_selesai"
                                    class="form-control"
-                                   value="<?= htmlspecialchars($data['tanggal_selesai'] ?? '') ?>"
+                                   id="tanggal_selesai"
+                                   name="tanggal_selesai"
+                                   value="<?= htmlspecialchars($data['tanggal_selesai'] ?? ''); ?>"
                                    required>
                         </div>
 
-                        <div class="mb-4">
+                        <!-- Status Aktif -->
+                        <div class="mb-3">
                             <label for="status_aktif" class="form-label">
                                 Status Aktif
                             </label>
 
-                            <select name="status_aktif"
+                            <select class="form-select"
                                     id="status_aktif"
-                                    class="form-select"
+                                    name="status_aktif"
                                     required>
 
                                 <option value="1"
-                                    <?= $data['status_aktif'] == 1 ? 'selected' : '' ?>>
+                                    <?= ($data['status_aktif'] == 1) ? 'selected' : ''; ?>>
                                     Aktif
                                 </option>
 
                                 <option value="0"
-                                    <?= $data['status_aktif'] == 0 ? 'selected' : '' ?>>
+                                    <?= ($data['status_aktif'] == 0) ? 'selected' : ''; ?>>
                                     Tidak Aktif
                                 </option>
 
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">
-                            Update Tahun Ajaran
-                        </button>
+                        <!-- Tombol -->
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                Update Tahun Ajaran
+                            </button>
 
-                        <a href="kelola_tahun_ajaran.php"
-                           class="btn btn-secondary">
-                            Kembali
-                        </a>
+                            <a href="kelola_tahun_ajaran.php"
+                               class="btn btn-secondary">
+                                Batal
+                            </a>
+                        </div>
 
                     </form>
 

@@ -64,7 +64,7 @@ if (!$data) {
                 <h2 class="mb-3">Edit Guru</h2>
 
                 <a href="kelola_guru.php" class="btn btn-secondary">
-                    Kembali ke Kelola Guru
+                    Kembali ke Data Guru
                 </a>
             </div>
 

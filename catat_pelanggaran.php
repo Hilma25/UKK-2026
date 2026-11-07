@@ -348,11 +348,11 @@ $hasil = mysqli_query($koneksi, $sql);
                 </div>
             </div>
 
-            <!-- TABEL DATA CATATAN PELANGGARAN -->
+            <!-- TABEL DATA CATAT PELANGGARAN -->
             <div class="card shadow-sm">
 
                 <div class="card-header bg-dark text-white">
-                    <h5 class="mb-0">Data Catatan Pelanggaran</h5>
+                    <h5 class="mb-0">Data Catat Pelanggaran</h5>
                 </div>
 
                 <div class="card-body">

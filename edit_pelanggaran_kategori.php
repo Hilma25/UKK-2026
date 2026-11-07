@@ -64,7 +64,7 @@ if (!$data) {
 
                 <a href="kelola_pelanggaran_kategori.php"
                    class="btn btn-secondary">
-                    Kembali ke Kelola Kategori Pelanggaran
+                    Kembali ke Data Kategori Pelanggaran
                 </a>
             </div>
 

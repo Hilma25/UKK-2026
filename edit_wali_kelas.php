@@ -81,7 +81,7 @@ $guru = mysqli_query(
 
                 <a href="kelola_wali_kelas.php"
                    class="btn btn-secondary">
-                    Kembali ke Kelola Wali Kelas
+                    Kembali ke Data Wali Kelas
                 </a>
             </div>
 

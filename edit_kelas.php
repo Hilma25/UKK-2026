@@ -56,7 +56,7 @@ if (!$data) {
                 <h2 class="mb-3">Edit Kelas</h2>
 
                 <a href="kelola_kelas.php" class="btn btn-secondary">
-                    Kembali ke Kelola Kelas
+                    Kembali ke Data Kelas
                 </a>
             </div>
 

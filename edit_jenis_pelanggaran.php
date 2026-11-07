@@ -84,7 +84,7 @@ $kategori = mysqli_stmt_get_result($stmt_kategori);
 
                 <a href="kelola_jenis_pelanggaran.php"
                    class="btn btn-secondary">
-                    Kembali ke Kelola Jenis Pelanggaran
+                    Kembali ke Data Jenis Pelanggaran
                 </a>
             </div>
 
