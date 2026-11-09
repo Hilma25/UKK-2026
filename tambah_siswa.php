@@ -53,30 +53,28 @@ $query_kelas = mysqli_query($koneksi, "
     <div class="card-body p-3">
         <form action="proses_tambah_siswa.php" method="POST">
 
-            <!-- NIS -->
-            <div class="mb-2">
-                <label for="nis" class="form-label mb-1">NIS</label>
+
+          <!-- NIS -->
+          <div class="mb-3">
+            <label class="form-label">NIS</label>
                 <input type="text" name="nis" id="nis"
-                    class="form-control"
-                    maxlength="10"
-                    pattern="[0-9]{1,10}"
-                    inputmode="numeric"
-                    title="NIS harus berupa angka maksimal 10 digit"
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
-                    required>
+                                   class="form-control" maxlength="10"
+                                   pattern="[0-9]{10}" inputmode="numeric"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                   title="NIS harus tepat 10 angka" required>
+                <div class="form-text">NIS harus terdiri dari 10 angka.</div>
             </div>
 
+
             <!-- NISN -->
-            <div class="mb-2">
-                <label for="nisn" class="form-label mb-1">NISN</label>
+            <div class="mb-3">
+            <label class="form-label">NISN</label>
                 <input type="text" name="nisn" id="nisn"
-                    class="form-control"
-                    maxlength="10"
-                    pattern="[0-9]{1,10}"
-                    inputmode="numeric"
-                    title="NISN harus berupa angka maksimal 10 digit"
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
-                    required>
+                                class="form-control" maxlength="10"
+                                pattern="[0-9]{10}" inputmode="numeric"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                title="NISN harus tepat 10 angka" required>
+                <div class="form-text">NISN harus terdiri dari 10 angka.</div>
             </div>
 
             <!-- Nama Siswa -->

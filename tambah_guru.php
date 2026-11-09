@@ -48,17 +48,15 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
             <form action="proses_tambah_guru.php" method="POST">
 
                 <div class="row g-3">
-
                     <!-- NIP -->
-                <div class="col-md-6">
-                    <label class="form-label">NIP</label>
-                    <input type="text" name="nip"
-                     class="form-control"
-                      placeholder="Masukkan NIP"
-                      maxlength="18"
-                      required>
-                     <small class="text-muted">NIP maksimal 18 digit.</small>
-                </div>
+               <div class="mb-3">
+                            <label class="form-label">NIP</label>
+                            <input type="text" name="nip" id="nip"
+                                   class="form-control"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                   maxlength="18" inputmode="numeric" required>
+                            <small>NIP harus berupa angka, maksimal 18 digit.</small>
+                        </div>
 
                     <!-- Nama Guru -->
                     <div class="col-md-6">
