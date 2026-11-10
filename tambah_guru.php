@@ -59,7 +59,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
                         </div>
 
                     <!-- Nama Guru -->
-                    <div class="col-md-6">
+                    <div class="col-mb-3">
                         <label class="form-label">Nama Guru</label>
                         <input type="text" name="nama"
                                class="form-control"
@@ -68,7 +68,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
                     </div>
 
                     <!-- Email -->
-                    <div class="col-md-6">
+                    <div class="col-mb-3">
                         <label class="form-label">Email Login</label>
                         <input type="email" name="email"
                                class="form-control"
@@ -77,7 +77,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
                     </div>
 
                     <!-- Password -->
-                    <div class="col-md-6">
+                    <div class="col-mb-3">
                         <label class="form-label">Password</label>
                         <input type="password" name="password"
                                class="form-control"
@@ -87,7 +87,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
                     </div>
 
                     <!-- Konfirmasi Password -->
-                    <div class="col-md-6">
+                    <div class="col-mb-3">
                         <label class="form-label">Konfirmasi Password</label>
                         <input type="password" name="konfirmasi_password"
                                class="form-control"
@@ -97,7 +97,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
                     </div>
 
                     
-                    <div class="col-md-6">
+                    <div class="col-mb-3">
                     <label class="form-label">Status Guru</label>
                     <select name="status" class="form-select" required>
                         <option value="">-- Pilih Status --</option>

@@ -1,20 +1,30 @@
+
 <?php
 // laporan.php
 
 include 'includes/cek_session.php';
 include 'config/koneksi.php';
 
-// Ambil data session
+// ============================================
+// 1. AMBIL DATA SESSION
+// ============================================
+
 $role = $_SESSION['role'] ?? '';
 $id_user = (int) ($_SESSION['id_user'] ?? 0);
 
-// Cek hak akses
+// ============================================
+// 2. CEK HAK AKSES
+// ============================================
+
 if ($role !== 'admin' && $role !== 'guru') {
     http_response_code(403);
     exit('Akses ditolak. Halaman ini hanya dapat diakses oleh Admin dan Guru Wali Kelas.');
 }
 
-// Jika login sebagai guru, cek apakah guru tersebut merupakan wali kelas aktif
+// ============================================
+// 3. CEK GURU WALI KELAS AKTIF
+// ============================================
+
 $id_guru = 0;
 
 if ($role === 'guru') {
@@ -45,11 +55,13 @@ if ($role === 'guru') {
     $id_guru = (int) $data_guru['id'];
 }
 
-// Filter tanggal
+// ============================================
+// 4. FILTER TANGGAL
+// ============================================
+
 $tanggal_mulai = $_GET['tanggal_mulai'] ?? '';
 $tanggal_selesai = $_GET['tanggal_selesai'] ?? '';
 
-// Validasi format tanggal
 if (
     ($tanggal_mulai !== '' &&
         !preg_match('/^\d{4}-\d{2}-\d{2}$/', $tanggal_mulai)) ||
@@ -67,7 +79,10 @@ if (
     exit('Tanggal mulai tidak boleh melebihi tanggal selesai.');
 }
 
-// Query laporan
+// ============================================
+// 5. QUERY LAPORAN
+// ============================================
+
 $sql = "SELECT
             ps.id,
             ps.tahun_ajaran_id,
@@ -91,7 +106,7 @@ $sql = "SELECT
 $types = "";
 $params = [];
 
-// Guru hanya melihat pelanggaran dari kelas yang menjadi tanggung jawabnya
+// Guru hanya melihat laporan kelas tanggung jawabnya
 if ($role === 'guru') {
 
     $sql .= " AND EXISTS (
@@ -126,18 +141,23 @@ $sql .= " ORDER BY ps.tanggal DESC, ps.id DESC";
 $stmt = mysqli_prepare($koneksi, $sql);
 
 if (!$stmt) {
-    die("Gagal menyiapkan laporan: " . htmlspecialchars(mysqli_error($koneksi)));
+    die("Gagal menyiapkan laporan: " .
+        htmlspecialchars(mysqli_error($koneksi)));
 }
 
-// Bind parameter jika tersedia
+// Bind parameter
 if (!empty($params)) {
+
     $bind_params = [$stmt, $types];
 
     foreach ($params as $key => $value) {
         $bind_params[] = &$params[$key];
     }
 
-    call_user_func_array('mysqli_stmt_bind_param', $bind_params);
+    call_user_func_array(
+        'mysqli_stmt_bind_param',
+        $bind_params
+    );
 }
 
 mysqli_stmt_execute($stmt);
@@ -155,14 +175,15 @@ $hasil = mysqli_stmt_get_result($stmt);
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+          rel="stylesheet">
 
     <!-- DataTables Bootstrap 5 -->
     <link href="https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.min.css"
-        rel="stylesheet">
+          rel="stylesheet">
 
     <style>
         @media print {
+
             .no-print,
             .sidebar,
             #tabelLaporan_wrapper .dt-search,
@@ -186,6 +207,7 @@ $hasil = mysqli_stmt_get_result($stmt);
             }
         }
     </style>
+
 </head>
 
 <body>
@@ -206,17 +228,24 @@ $hasil = mysqli_stmt_get_result($stmt);
 
             <!-- INFORMASI AKSES -->
             <div class="alert alert-info no-print">
+
                 <?php if ($role === 'admin') { ?>
+
                     Anda login sebagai <strong>Admin</strong>.
                     Anda dapat melihat seluruh laporan pelanggaran siswa.
+
                 <?php } else { ?>
+
                     Anda login sebagai <strong>Guru Wali Kelas</strong>.
                     Anda hanya dapat melihat laporan dari kelas yang menjadi tanggung jawab Anda.
+
                 <?php } ?>
+
             </div>
 
-            <!-- FILTER TANGGAL -->
+            <!-- FILTER TANGGAL (TETAP SEPERTI KODE AWAL) -->
             <div class="card shadow-sm mb-4 no-print">
+
                 <div class="card-header bg-primary text-white">
                     Filter Laporan
                 </div>
@@ -228,21 +257,25 @@ $hasil = mysqli_stmt_get_result($stmt);
                         <div class="row">
 
                             <div class="col-md-4 mb-3">
+
                                 <label class="form-label">Tanggal Mulai</label>
 
                                 <input type="date"
-                                    name="tanggal_mulai"
-                                    class="form-control"
-                                    value="<?= htmlspecialchars($tanggal_mulai); ?>">
+                                       name="tanggal_mulai"
+                                       class="form-control"
+                                       value="<?= htmlspecialchars($tanggal_mulai); ?>">
+
                             </div>
 
                             <div class="col-md-4 mb-3">
+
                                 <label class="form-label">Tanggal Selesai</label>
 
                                 <input type="date"
-                                    name="tanggal_selesai"
-                                    class="form-control"
-                                    value="<?= htmlspecialchars($tanggal_selesai); ?>">
+                                       name="tanggal_selesai"
+                                       class="form-control"
+                                       value="<?= htmlspecialchars($tanggal_selesai); ?>">
+
                             </div>
 
                             <div class="col-md-4 mb-3 d-flex align-items-end gap-2">
@@ -267,13 +300,13 @@ $hasil = mysqli_stmt_get_result($stmt);
             <!-- TABEL LAPORAN -->
             <div class="card shadow-sm">
 
-                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
 
                     <span>Data Laporan Pelanggaran</span>
 
                     <button type="button"
-                        onclick="window.print()"
-                        class="btn btn-light btn-sm no-print">
+                            onclick="window.print()"
+                            class="btn btn-light btn-sm no-print">
                         Cetak Laporan
                     </button>
 
@@ -284,9 +317,10 @@ $hasil = mysqli_stmt_get_result($stmt);
                     <div class="table-responsive">
 
                         <table id="tabelLaporan"
-                            class="table table-striped table-bordered table-hover align-middle w-100">
+                               class="table table-striped table-bordered table-hover align-middle w-100">
 
                             <thead class="table-dark">
+
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Siswa</th>
@@ -298,13 +332,20 @@ $hasil = mysqli_stmt_get_result($stmt);
                                     <th>Tindakan</th>
                                     <th>Status</th>
                                 </tr>
+
                             </thead>
 
                             <tbody>
 
-                                <?php while ($row = mysqli_fetch_assoc($hasil)) { ?>
+                                <?php
+                                if ($hasil && mysqli_num_rows($hasil) > 0) {
+
+                                    while ($row = mysqli_fetch_assoc($hasil)) {
+                                ?>
 
                                     <tr>
+
+                                        <!-- Nomor urut otomatis -->
                                         <td></td>
 
                                         <td>
@@ -338,9 +379,13 @@ $hasil = mysqli_stmt_get_result($stmt);
                                         <td>
                                             <?= htmlspecialchars($row['status'] ?? '-'); ?>
                                         </td>
+
                                     </tr>
 
-                                <?php } ?>
+                                <?php
+                                    }
+                                }
+                                ?>
 
                             </tbody>
 
@@ -351,16 +396,22 @@ $hasil = mysqli_stmt_get_result($stmt);
                 </div>
             </div>
 
+            <!-- KEMBALI KE DASHBOARD -->
             <div class="mt-3 no-print">
+
                 <a href="dashboard.php" class="btn btn-secondary">
                     Kembali ke Dashboard
                 </a>
+
             </div>
 
         </main>
 
     </div>
 </div>
+
+<!-- JavaScript Bootstrap 5 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -371,19 +422,27 @@ $hasil = mysqli_stmt_get_result($stmt);
 <!-- DataTables Bootstrap 5 -->
 <script src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.min.js"></script>
 
-<!-- Inisialisasi DataTables -->
+<!-- KONFIGURASI DATATABLES -->
 <script>
+
 $(document).ready(function () {
 
-    $('#tabelLaporan').DataTable({
+    var tabel = $('#tabelLaporan').DataTable({
 
         language: {
+
             search: "Cari:",
+
             lengthMenu: "Tampilkan _MENU_ data",
+
             info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
-            infoEmpty: "Tidak ada data laporan",
+
+            infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
+
             infoFiltered: "(difilter dari _MAX_ total data)",
+
             zeroRecords: "Data laporan tidak ditemukan",
+
             emptyTable: "Belum ada data pelanggaran",
 
             paginate: {
@@ -392,14 +451,17 @@ $(document).ready(function () {
                 next: "Berikutnya",
                 previous: "Sebelumnya"
             }
+
         },
 
         pageLength: 10,
 
         lengthMenu: [5, 10, 25, 50, 100],
 
+        // Urutkan berdasarkan tanggal terbaru
         order: [[5, 'desc']],
 
+        // Kolom nomor tidak bisa diurutkan atau dicari
         columnDefs: [
             {
                 targets: 0,
@@ -412,6 +474,7 @@ $(document).ready(function () {
         drawCallback: function () {
 
             var api = this.api();
+
             var info = api.page.info();
 
             api.column(0, {
@@ -427,6 +490,7 @@ $(document).ready(function () {
     });
 
 });
+
 </script>
 
 </body>
@@ -435,4 +499,3 @@ $(document).ready(function () {
 <?php
 mysqli_stmt_close($stmt);
 ?>
-\
