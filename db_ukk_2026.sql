@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Nov 2026 pada 06.50
+-- Waktu pembuatan: 11 Nov 2026 pada 04.44
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -336,7 +336,7 @@ INSERT INTO `t_siswa` (`id`, `nis`, `nisn`, `nama`, `jenis_kelamin`, `tanggal_la
 (5, '102410524', '0035408799', 'Azmil Amira', 'P', '2008-05-18', 'Jl. Cihideung No. 54, Tasikmalaya', 1, '2026-07-01 01:00:00', '2026-07-01 01:00:00'),
 (6, '102410525', '0024065539', 'Azril Akbar Fawji Abdillah', 'L', '2009-03-21', 'Jl. Tamansari No. 12, Tasikmalaya', 1, '2026-07-01 01:00:00', '2026-07-01 01:00:00'),
 (7, '102410527', '0035597600', 'Erlangga Saputra Hidayat', 'L', '2008-11-28', 'Jl. Ir. H. Juanda No. 105, Tasikmalaya', 1, '2026-07-01 01:00:00', '2026-07-01 01:00:00'),
-(8, '102410528', '0088297510', 'Hilma Humma Tunnajah', 'P', '2009-11-17', 'Jl. Siliwangi No. 8, Tasikmalaya', 1, '2026-07-01 01:00:00', '2026-07-01 01:00:00'),
+(8, '102410528', '0088297510', 'Hilma Himma Tunnajah', 'P', '2009-11-17', 'Jl. Siliwangi No. 8, Tasikmalaya', 1, '2026-07-01 01:00:00', '2026-07-01 01:00:00'),
 (9, '102410529', '0029774682', 'Ilma Najya', 'P', '2008-11-08', 'Jl. Cihideung No. 8, Tasikmalaya', 1, '2026-07-01 01:00:00', '2026-07-01 01:00:00'),
 (10, '102410531', '0048309143', 'Julianda Dharma Pangestu', 'L', '2008-12-28', 'Jl. Rumah Sakit Umum No. 91, Tasikmalaya', 1, '2026-07-01 01:00:00', '2026-07-01 01:00:00'),
 (11, '102410532', '0026974998', 'Kayila Nur Fadilah', 'P', '2008-09-27', 'Jl. RE Martadinata No. 44, Tasikmalaya', 1, '2026-07-01 01:00:00', '2026-07-01 01:00:00'),
